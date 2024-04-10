@@ -1,0 +1,45 @@
+/*** A_CountGames ***/  
+SELECT
+   CONSOLE,
+   COUNT(*) as SUMGAMES
+FROM
+   LIST_ROMS
+GROUP BY
+   CONSOLE;
+   
+/*** A_CountImages ***/  
+SELECT
+   CONSOLE,
+   COUNT(*) as SUMIMAGES
+FROM
+   LIST_IMAGES
+GROUP BY
+   CONSOLE;
+   
+/*** B_GamesWithImages ***/
+SELECT 
+       LIST_ROMS.CONSOLE,
+       LIST_ROMS.NAMEROM,
+       LIST_ROMS.FILE,
+       LIST_IMAGES.FILE as IMAGEFILE,
+       LIST_IMAGES.PATHFILE as IMAGEPATH
+              
+  FROM LIST_ROMS
+       LEFT JOIN
+       LIST_IMAGES 
+       ON 
+       (LIST_IMAGES.NAMEROM = LIST_ROMS.NAMEROM);
+       
+/***C1_CountGamesWithImagesInXML***/
+select count(), CONSOLE
+from list_games_meta_XML
+where IMAGE not NULL
+group by CONSOLE;
+
+/***C2_CountGamesWithImages
+
+select count(), CONSOLE
+from B_GamesWithImages
+where IMAGEFILE not NULL
+group by CONSOLE;
+
