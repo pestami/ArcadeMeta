@@ -25,10 +25,14 @@ from CAX_XML import  cax_xml_rom
 def SetFlags(sFLAGS):
     
      FLAGS = {
-    "PATHS": 1,"INITIALIZE_DB": 0,
-    "LOADLISTGAMES": 0,"LOADROMS": 0,"LOADIMAGES": 0,
-    "LOADMEDIA":0,"LOADIMAGESSCRAPED": 0,
-    "LOADLISTGAMES_2_XML_DB": 1
+    "PATHS": 1,
+    "INITIALIZE_DB": 0,
+    "LOADLISTGAMES": 0,
+    "LOADROMS": 0,
+    "LOADIMAGES": 0,
+    "LOADMEDIA":0,
+    "LOADIMAGESSCRAPED": 0,
+    "LOADLISTGAMES_2_XML_DB": 0
      }      
  
      i=0
@@ -51,7 +55,7 @@ def SetFagsConsole(sFLAGSConsole):
     "dreamcast":0,
     "gba":0,
     "gc":0,
-    "mame":0,
+    "mame":1,
     "mame-advmame":0,
     "mame-libretro":0,
     "mame-mame4all":0,
@@ -98,7 +102,7 @@ if __name__ == '__main__':
     else:
         #"1 1 PATHS 2 INITIALIZE_DB 3 LOADLISTGAMES 4 LOADROMS"
         #2  1 LOADIMAGES 2 LOADMEDIA 3 LOADIMAGESSCRAPED 4 LOADLISTGAMES_2_XML_DB
-        sFLAGS='1001 1001 X'.replace(" ", "")
+        sFLAGS='1001 0000 X'.replace(" ", "")
         FLAGS = SetFlags(sFLAGS)         
          #################12345678
          
@@ -116,7 +120,7 @@ if __name__ == '__main__':
          #6 psp"psx"saturn"sg-1000"
          #7 snes"TurboGrafX"zxspectrum"pcengine
 
-         sFLAGS='0000 0000 0000 0000 0000 0000 0000X'.replace(" ", "")
+         sFLAGS='0000 0000 1111 0000 0000 0000 0000X'.replace(" ", "")
          FLAGSConsole = SetFagsConsole(sFLAGS) 
          
          
@@ -128,12 +132,13 @@ if __name__ == '__main__':
 #    sROOT= "\\".join(sCurrentDir.split("\\")[:-1])
 #    sROOT= "/".join(sCurrentDir.split("/")[:-1])
     
-    sROOT_DB='/home/pi/Documents/Projects_DIY/2024-ROMS-DB/ROM_DB_PY'
-    sROOT_GAMES='/home/pi/ROMS_EXTRA'
+    sROOT_DB='/home/pi/Documents/ArcadeMeta/ROM_DB_PY'
+    sROOT_GAMES='/media/pi/ROM_EXTRA'    #'/media/pi/ROM_EXTRA'
     
     print ("Root GAMES Direcory=", sROOT_GAMES)
     
     #sROOT='/media/pi/ROM_EXTRA'
+
 
     sPathFileDB=sROOT_DB + '/DB/RetroRoms.db'
     sPathIMAGES=sROOT_GAMES + '/downloaded_images'
