@@ -44,12 +44,14 @@ class cax_xml_rom:
             cur = con.cursor()
             #-BEGIN-----Games Database TreeTop structure----------------------------------------------------
             cur.execute("DROP TABLE IF EXISTS LIST_ROMS")  # XML lists of games
-            cur.execute("CREATE TABLE LIST_ROMS (PATH,FILE,CONSOLE,PATHFILE,NAMEROM type UNIQUE);") # use your column names here
+            #cur.execute("CREATE TABLE LIST_ROMS (PATH,FILE,CONSOLE,PATHFILE,NAMEROM type UNIQUE);") # use your column names here
+            cur.execute("CREATE TABLE LIST_ROMS (PATH,FILE,CONSOLE,PATHFILE  type UNIQUE ,NAMEROM);") # use your column names here
             #-END-------Games Database TreeTop structure----------------------------------------------------
 
             cur.execute("DROP TABLE IF EXISTS LIST_IMAGES")  # XML lists of games
-            cur.execute("CREATE TABLE LIST_IMAGES (PATH,FILE,CONSOLE,PATHFILE,NAMEROM type UNIQUE);") # use your column names here
-
+            #cur.execute("CREATE TABLE LIST_IMAGES (PATH,FILE,CONSOLE,PATHFILE,NAMEROM type UNIQUE);") # use your column names here
+            cur.execute("CREATE TABLE LIST_IMAGES (PATH,FILE,CONSOLE,PATHFILE type UNIQUE,NAMEROM);") # use your column names here
+            
             cur.execute("DROP TABLE IF EXISTS LIST_XML_GAMESLISTS")  # XML lists of games
             cur.execute("CREATE TABLE LIST_XML_GAMESLISTS (PATH,FILE,CONSOLE,PATHFILE type UNIQUE,ITEMS);") # use your column names here
 
@@ -181,12 +183,16 @@ class cax_xml_rom:
             nGameCounter=0
             flagDebug=kwargs.get('flagDebug', None)
             flagDebugVerbose=kwargs.get('flagDebugVerbose', None)
-            sPathFileSearchSpecImages=sPathFileROMS +'/**/*.[A-Za-z,0-9]*'
+            sPathFileSearchSpecImages=sPathFileROMS +'/**/*.[A-Za-z0-9]*'
+           # sPathFileSearchSpecImages=sPathFileROMS +'/mame-mame4all/*.*'
+           # sPathFileSearchSpecImages=sPathFileROMS +'/**/*'
 
             if flagDebug :
                     print('========================================')
                     print('Found ROM Files as Follows:')
                     print('........................................')
+                    print(sPathFileSearchSpecImages)
+                    
             for sfilename in glob.iglob(sPathFileSearchSpecImages):
 
                 if flagDebugVerbose : print(sfilename)
@@ -473,100 +479,9 @@ class cax_xml_rom:
 if __name__ == '__main__':
 ################################################################################
 
-    sCurrentDir =os.path.realpath(os.path.dirname(__file__))
-    sROOT= "\\".join(sCurrentDir.split("\\")[:-1])
-    sROOT= "/".join(sCurrentDir.split("/")[:-1])
-    print ("sCurrentDir Direcory=", sCurrentDir)
-    print ("Root Direcory=", sROOT)
-    #===============================================================================
-    #!/usr/bin/python
-    #----------------------------
-    # redirect StdOut output to log file
-    if 1==2:
-        sPath_Log_File =sROOT + '/RomsDB/log_dev.txt'
-        old_stdout = sys.stdout
-        log_file = open(sPath_Log_File,'a')
-        sys.stdout = log_file
-    #----------------------------
     print ("======================================================")
     print ("1. BEGIN TEST XML ==================================")
     print ("======================================================")
-    #/media/pi/ROM_EXTRA/gameslists/ps2
-    
-    
-    FLAGS = {
-      "PATHS": 1,
-      "INITIALIZE_DB": 0,
-      "LOADLISTGAMES": 0,
-      "LOADROMS": 0,
-      "LOADIMAGES": 0,
-      "LOADMEDIA":0,
-      "LOADIMAGESSCRAPED": 0,
-      "LOADLISTGAMES_2_XML_DB":1
-     }          
-    
-    CAX_ROM=cax_xml_rom(sROOT)
-        
-    sPathFileDB=sROOT + '/RomsDB/DB/RetroRoms.db'
-    sPathIMAGES=sROOT + '/downloaded_images'
-    sPathMEDIA=sROOT + '/downloaded_media'
-    sPathIMAGESSCRAPED=sROOT + '/downloaded_images_scraped'
-    sPathGamesXML=sROOT + '/gameslists'
-    sPathROMS=sROOT + '/roms'
-
-    if FLAGS["INITIALIZE_DB"]==1 :
-        print ("\n========================================================")
-        print ("Clear All Tables-------------")
-        CAX_ROM.ROM_DB_Initialize(sPathFileDB)
-
-    if FLAGS["LOADLISTGAMES"]==1 :
-        print ("\n========================================================")
-        print ("Load Paths to GAMELISTS XML for each console into DB")
-        CAX_ROM.ROM_DB_LoadListsGameXML(sPathFileDB,sPathGamesXML, flagDebug=1)  # Looks for XML files and loads file list into DB
-
-    if FLAGS["LOADIMAGES"]==1 :
-        print ("\n========================================================")
-        print ("Load RETROPIE Images file paths  into DB")
-        print (sPathIMAGES)
-        CAX_ROM.ROM_DB_LoadImages(sPathFileDB,sPathIMAGES, flagDebug=1)   # Looks for XML files and loads file list into DB
-        print ("======================================================")
-    
-    if FLAGS["LOADMEDIA"]==1 :
-        print ("\n========================================================")
-        print ("Load RETROPIE Images file paths  into DB")
-        print (sPathMEDIA)
-        CAX_ROM.ROM_DB_LoadImages(sPathFileDB,sPathMEDIA, flagDebug=1)   # Looks for XML files and loads file list into DB
-        print ("======================================================")
-        
-    if FLAGS["LOADIMAGESSCRAPED"]==1 :
-        print ("\n========================================================")
-        print ("Load RETROPIE Images file paths  into DB")
-        print (sPathIMAGESSCRAPED)
-        CAX_ROM.ROM_DB_LoadImages(sPathFileDB,sPathIMAGESSCRAPED, flagDebug=1)   # Looks for XML files and loads file list into DB
-        print ("======================================================")
-        
-    if FLAGS["LOADROMS"]==1 :
-        print ("\n========================================================")
-        print ("Load RETROPIE ROMS file paths  into DB")
-        print (sPathROMS)
-        CAX_ROM.ROM_DB_LoadRoms(sPathFileDB,sPathROMS, flagDebug=1)   # Looks for XML files and loads file list into DB
-        print ("======================================================")
-
-
-    if FLAGS["LOADLISTGAMES_2_XML_DB"]==1:
-        print ("\n======================================================")
-        print ("2. BEGIN RESULTS show Game [lCollection] ============")
-
-        console='c64'
-        CAX_ROM.Load_xml_gameslist(sROOT,sPathFileDB,console)
-        print ("======================================================")
-
-   # CAX_ROM.make_xml("c64","gamelist.xml")
-    #===============================================================================
-
-    print ("END TEST XML ==================================")
-    print ("======================================================")
-
 ##    name = input('What is your name: ')
 
   #  exit(0)

@@ -55,7 +55,7 @@ def SetFagsConsole(sFLAGSConsole):
     "dreamcast":0,
     "gba":0,
     "gc":0,
-    "mame":1,
+    "mame":0,
     "mame-advmame":0,
     "mame-libretro":0,
     "mame-mame4all":0,
@@ -102,7 +102,7 @@ if __name__ == '__main__':
     else:
         #"1 1 PATHS 2 INITIALIZE_DB 3 LOADLISTGAMES 4 LOADROMS"
         #2  1 LOADIMAGES 2 LOADMEDIA 3 LOADIMAGESSCRAPED 4 LOADLISTGAMES_2_XML_DB
-        sFLAGS='1001 0000 X'.replace(" ", "")
+        sFLAGS='1001 1000 X'.replace(" ", "")
         FLAGS = SetFlags(sFLAGS)         
          #################12345678
          
@@ -120,7 +120,7 @@ if __name__ == '__main__':
          #6 psp"psx"saturn"sg-1000"
          #7 snes"TurboGrafX"zxspectrum"pcengine
 
-         sFLAGS='0000 0000 1111 0000 0000 0000 0000X'.replace(" ", "")
+         sFLAGS='0000 0000 0001 0000 0000 0000 0000X'.replace(" ", "")
          FLAGSConsole = SetFagsConsole(sFLAGS) 
          
          
@@ -187,7 +187,7 @@ if __name__ == '__main__':
         CAX_ROM.ROM_DB_LoadListsGameXML(sPathFileDB,sPathGamesXML, flagDebug=1)  # Looks for XML files and loads file list into DB
    
     if FLAGS["LOADROMS"]==1 :
-        print ("\n##########################################################")
+        print ("\n##########################################################")   # Total Game ROM Found and uploaded: 13938    
         print ("Load RETROPIE ROM file paths  into DB")
         print (sPathROMS)
         CAX_ROM.ROM_DB_LoadRoms(sPathFileDB,sPathROMS, flagDebug=1)   # Looks for XML files and loads file list into DB
