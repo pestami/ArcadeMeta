@@ -252,7 +252,11 @@ def Open_SQLite():
         oShape = oSelection.getByIndex(0)
         sCMD = oShape.String        #setString   
     
+<<<<<<< HEAD
     sCMD=sCMD.replace('%ROOT%', 'C:/Users/sesa237770/Documents/ArcadeMeta')
+=======
+   
+>>>>>>> 12d70ab (subProcess)
     sCMD=sCMD.replace('\n', '')
     sCMD=sCMD.replace('\r', '')
 
@@ -286,7 +290,11 @@ def Open_PythonIDE():
         oShape = oSelection.getByIndex(0)
         sCMD = oShape.String        #setString   
       
+<<<<<<< HEAD
     sCMD=sCMD.replace('%ROOT%', 'C:/Users/sesa237770/Documents/ArcadeMeta')
+=======
+  
+>>>>>>> 12d70ab (subProcess)
 
     sAPP='\"C:/ProgrammeApps/PyScripter/PyScripter.exe\"' 
     sAPPNAME='PyScripter'      
