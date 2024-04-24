@@ -1,0 +1,8 @@
+SELECT
+   FILE,
+   CONSOLE,
+   NAMEROM
+FROM
+   LIST_ROMS
+WHERE
+	NAMEROM like '%invaders%'
