@@ -6,7 +6,9 @@ Collection of scripts and config files for arcade
 
 A Download example:
 
-wget -O Search_invaders.cfg https://github.com/pestami/ArcadeMeta/blob/main/collections/Search_invaders.cfg
+wget -P /home/pi/.emulationstation/collections https://github.com/pestami/ArcadeMeta/blob/main/collections/Search_invaders.cfg
+
+
 
 
 
