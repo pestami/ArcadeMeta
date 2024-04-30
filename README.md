@@ -9,12 +9,15 @@ Names of collections were tested for the naming format:
 
 ## Collections  
 
+For a file at : 
+
+https://github.com/pestami/ArcadeMeta/blob/main/collections/custom-search%20Invaders.cfg
+
 A Download example:
 
 ``
-wget -P /home/pi/.emulationstation/collections https://github.com/pestami/ArcadeMeta/blob/main/collections/custom-search_invaders.cfg
-``
+target=/home/pi/.emulationstation/collections
+source=https://raw.githubusercontent.com/pestami/ArcadeMeta/main/collections/custom-search%20Invaders.cfg
+wget -P $target $source
 
-``
-wget -P /home/pi/.emulationstation/collections https://raw.githubusercontent.com/pestami/ArcadeMeta/c265bd42f43fea3eab873193969af26712f9c2f8/collections/custom-search_invaders.cfg
 ``
