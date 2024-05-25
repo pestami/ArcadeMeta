@@ -21,7 +21,7 @@ from CAX_XML import  cax_xml_rom
 
 #==============================================================================
 #===============================================================================
-
+#%%
 def SetFlags(sFLAGS):
     
      FLAGS = {
@@ -43,7 +43,9 @@ def SetFlags(sFLAGS):
            
      print('SetFags()=' + str(FLAGS) )    
      return FLAGS
+#%%
 #===============================================================================
+#%%
 def SetFagsConsole(sFLAGSConsole):
     
      FLAGSConsole = {
@@ -89,6 +91,7 @@ def SetFagsConsole(sFLAGSConsole):
      print('SetFags()=' + str(FLAGSConsole) )
     
      return FLAGSConsole
+ #%%
 ###############################################################################
 if __name__ == '__main__':
  ##############################################################################
@@ -125,7 +128,8 @@ if __name__ == '__main__':
          #6 psp"psx"saturn"sg-1000"
          #7 snes"TurboGrafX"zxspectrum"pcengine
          sFLAGS='0000000000000000000000000001111X'
-         sFLAGS='0000000000000000000000000000001X'
+         #sFLAGS='0000000000000000000000000000001X'
+        
          sFLAGS=sFLAGS.replace(" ", "")
          sFLAGS=sFLAGS.replace("X", "")
          
