@@ -9,6 +9,7 @@
 #-------------------------------------------------------------------------------
 import sqlite3
 from colors import colors
+import os
 
 
 class s2c:
@@ -159,20 +160,64 @@ class s2c:
             print('.........................................................')
 #-------------------------------------------------------------------------------
 #============================================================================
+#===========================================================================
+    def DisplayCollections():
+               
+                pathcollections='/home/pi/.emulationstation/collections/'             
+
+                dir_list = os.listdir(pathcollections)
+                i=0
+               
+                # prints all files
+                print('.........................................................')
+                print('-----COLLECTIONS FOUND------------------')
+                print("Directory= '", pathcollections, "' :")
+                for sfiles in dir_list:                   
+                    print(str(i) + ": " + sfiles)
+                    i=i+1
+                return dir_list
+#-------------------------------------------------------------------------------
+#============================================================================
+#===========================================================================
+    def DeleteCollection(collections_List):
+            print('.........................................................')
+            print('Type collection index Number, it will be deleted: ')
+            sIndex = str(input())
+            sIndex=sIndex.replace(' ','')
+            
+            pathcollections='/home/pi/.emulationstation/collections/' 
+            file_path = pathcollections + collections_List[int(sIndex)]
+            
+            if os.path.exists(file_path):
+                    os.remove(file_path)
+                    print("The collection has been removed.")
+                    print(file_path)
+            else:
+                    print("The system cannot find the file specified.")
+                    print(file_path)
+                    
+        
+        
+        
+#============================================================================
 #============================================================================
     def Help(ID):
             
             print( colors.fg.green, "...")
             print('=====================================================')
-            print('==Program to generate a playlist=====================')
+            print('==Program to generate a playlist=======V20250527=====')
             print('=====================================================')
             print('type s keyword1+keyword2 to search for game in Name of ROM')
             print('type sd keyword1+keyword2 to search for games in description')
-            print('type l to write playlist to collections')
-            print('type wr to write playlist to collections and rename')
-            print('type w to write playlist to collections')
-            print('type h to help')
-            print('type x to quit')
+            print('type l  list last search results')
+            print('type wr to write playlist to a collection list and rename')
+            print('type w  to write playlist to collection list')
+            print('....................................................')
+            print('type lc to list collections')
+            print('type dc to delete a collection')
+            print('....................................................')
+            print('type h  to help')
+            print('type x  to quit')
             print('=====================================================')
 #-------------------------------------------------------------------------------
 #============================================================================

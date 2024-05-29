@@ -26,6 +26,7 @@ print( colors.fg.red, "...")
 
 sCMD=''
 result_List=[]
+collections_List=[]
 
 #-------------------------------------------------------------------------------
 
@@ -67,6 +68,12 @@ while(sCMD!='x'):
           
     elif  sCOMMAND=='l':   
           s2c.Displaylist(result_List)
+          
+    elif  sCOMMAND=='lc':   
+          collections_List= s2c.DisplayCollections()
+          
+    elif  sCOMMAND=='dc':   
+          s2c.DeleteCollection(collections_List)
           
     elif  sCOMMAND=='h':   
           s2c.Help('')
