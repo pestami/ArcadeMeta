@@ -80,7 +80,9 @@ while(sCMD!='x'):
           
     elif  sCOMMAND=='x':   
           print('Good Bye, enjoy your games.')
-          print('Remember: restart emulationstation and ensure collection is set visible!')
+          print('Remember:')
+          print('1. : restart emulationstation !')
+          print('2. : Ensure collection is set visible !')
           
     elif  sCOMMAND=='?':   
           s2c.Help('')

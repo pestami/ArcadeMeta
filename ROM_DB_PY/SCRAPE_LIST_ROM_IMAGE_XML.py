@@ -80,7 +80,7 @@ def SetFagsConsole(sFLAGSConsole):
     "msx":0,
     "gamegear":0,
     "fba":0,
-
+    "intellivision":1,
      }      
  
      i=0
@@ -110,6 +110,7 @@ if __name__ == '__main__':
         #2  1 LOADIMAGES 2 LOADMEDIA 3 LOADIMAGESSCRAPED 4 LOADLISTGAMES_2_XML_DB
         sFLAGS='1001 1000 X'
         sFLAGS='1010 0001 X'  # use this to load gameslist.path and xml contents
+        #       1234 5678
         sFLAGS=sFLAGS.replace(" ", "")
         FLAGS = SetFlags(sFLAGS)         
          #################12345678
@@ -127,8 +128,8 @@ if __name__ == '__main__':
          #5 "neogeo"nes"pc"ports"
          #6 psp"psx"saturn"sg-1000"
          #7 snes"TurboGrafX"zxspectrum"pcengine
-         sFLAGS='0000000000000000000000000001111X'
-         #sFLAGS='0000000000000000000000000000001X'
+         sFLAGS='00000000000000000000000000000001X'
+         #sFLAGS='00000000000000000000000000000001X'
         
          sFLAGS=sFLAGS.replace(" ", "")
          sFLAGS=sFLAGS.replace("X", "")
@@ -145,7 +146,9 @@ if __name__ == '__main__':
 #    sROOT= "/".join(sCurrentDir.split("/")[:-1])
     
     sROOT_DB='/home/pi/Documents/ArcadeMeta/ROM_DB_PY'
-    sROOT_GAMES='/home/pi/ROMS_EXTRA/'    #'/media/pi/ROM_EXTRA'
+    sROOT_GAMES='/home/pi/ROMS_EXTRA'    #'/media/pi/ROM_EXTRA'
+    sROOT_GAMES='/home/pi/RetroPie'    #'/media/pi/ROM_EXTRA'
+   # !!!!!! the real path should be in DB as in retropie /home/pi/RetroPie/roms/
     
     print ("Root GAMES Direcory=", sROOT_GAMES)
     

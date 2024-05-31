@@ -92,6 +92,8 @@ class s2c:
 #============================================================================
     def Displaylist(result_List):
         
+        #print(chr(27) + "[2J")
+        os.system('cls||clear')
         print('.........................................................')
         print('-----KEWORDS FOUND LIST------------------')
         sFound=str(len(result_List))
@@ -169,6 +171,7 @@ class s2c:
                 i=0
                
                 # prints all files
+                os.system('cls||clear')
                 print('.........................................................')
                 print('-----COLLECTIONS FOUND------------------')
                 print("Directory= '", pathcollections, "' :")
@@ -203,6 +206,8 @@ class s2c:
 #============================================================================
     def Help(ID):
             
+            #print(chr(27) + "[2J")
+            os.system('cls||clear')
             print( colors.fg.green, "...")
             print('=====================================================')
             print('==Program to generate a playlist=======V20250527=====')
