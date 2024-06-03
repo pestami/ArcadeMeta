@@ -42,6 +42,9 @@ def SetFlags(sFLAGS):
            i+=1
            
      print('SetFags()=' + str(FLAGS) )    
+     for key in FLAGS:
+         print(key, ' : ', FLAGS[key])
+     
      return FLAGS
 #%%
 #===============================================================================
@@ -88,13 +91,16 @@ def SetFagsConsole(sFLAGSConsole):
            
            FLAGSConsole[item]=int(sFLAGSConsole[i])
            i+=1
-     print('SetFags()=' + str(FLAGSConsole) )
+     #print('SetFags()=' + str(FLAGSConsole) )
+     for key in FLAGSConsole:
+         print(key, ' : ', FLAGSConsole[key])
     
      return FLAGSConsole
  #%%
 ###############################################################################
 if __name__ == '__main__':
  ##############################################################################
+    os.system('cls||clear')
     print ("======================================================")
     print ("Arguments List =======================================")
     print ("======================================================")
@@ -102,7 +108,7 @@ if __name__ == '__main__':
     print ("======================================================")
     
     if len(sys.argv)>1:
-          print('ARG1=1 =' +sys.argv[1])
+          print('ARG1=' +sys.argv[1])
           FLAGS = SetFlags(sys.argv[1])
           
     else:
@@ -146,19 +152,21 @@ if __name__ == '__main__':
 #    sROOT= "/".join(sCurrentDir.split("/")[:-1])
     
     sROOT_DB='/home/pi/Documents/ArcadeMeta/ROM_DB_PY'
-    sROOT_GAMES='/home/pi/ROMS_EXTRA'    #'/media/pi/ROM_EXTRA'
-    sROOT_GAMES='/home/pi/RetroPie'    #'/media/pi/ROM_EXTRA'
+    sROOT_retropie='/home/pi/ROMS_EXTRA'    #'/media/pi/ROM_EXTRA'
+    sROOT_retropie='/home/pi/RetroPie'    #'/media/pi/ROM_EXTRA'
+    sROOT_emulationstation='/home/pi/.emulationstation' 
+    
    # !!!!!! the real path should be in DB as in retropie /home/pi/RetroPie/roms/
     
-    print ("Root GAMES Direcory=", sROOT_GAMES)
+    print ("Root GAMES Direcory=", sROOT_retropie)
     
     #sROOT='/media/pi/ROM_EXTRA'
 
 
     sPathFileDB=sROOT_DB + '/DB/RetroRoms.db'
-    sPathIMAGES=sROOT_GAMES + '/downloaded_images'
-    sPathGamesXML=sROOT_GAMES + '/gameslists'
-    sPathROMS=sROOT_GAMES + '/roms'
+    sPathIMAGES=sROOT_emulationstation + '/downloaded_images'
+    sPathGamesXML=sROOT_emulationstation + '/gamelists'
+    sPathROMS=sROOT_retropie + '/roms'
 
     print ("sPathFileDB=",sPathFileDB)
     print ("sPathIMAGES=",sPathIMAGES)
@@ -180,16 +188,16 @@ if __name__ == '__main__':
     print ("======================================================")
     print ("1. BEGIN TEST XML ==================================")
     print ("======================================================")
-    #/media/pi/ROM_EXTRA/gameslists/ps2
+    #/media/pi/ROM_EXTRA/gamelists/ps2
  
     sPathFileDB=sROOT_DB + '/DB/RetroRoms.db'
-    sPathIMAGES=sROOT_GAMES + '/downloaded_images'
-    sPathMEDIA=sROOT_GAMES + '/downloaded_media'
-    sPathIMAGESSCRAPED=sROOT_GAMES + '/downloaded_images_scraped'
-    sPathGamesXML=sROOT_GAMES + '/gameslists'
-    sPathROMS=sROOT_GAMES + '/roms'
+    sPathIMAGES=sROOT_emulationstation + '/downloaded_images'
+    sPathMEDIA=sROOT_emulationstation + '/downloaded_media'
+    sPathIMAGESSCRAPED=sROOT_emulationstation + '/downloaded_images_scraped'
+    sPathGamesXML=sROOT_emulationstation + '/gamelists'
+    sPathROMS=sROOT_retropie + '/roms'
     
-    CAX_ROM=cax_xml_rom(sROOT_GAMES)
+    CAX_ROM=cax_xml_rom(sROOT_retropie)
 
     if FLAGS["INITIALIZE_DB"]==1 :
         print ("\n###INITIALIZE_DB#######################################################")
@@ -201,13 +209,7 @@ if __name__ == '__main__':
         print ("Load Paths to GAMELISTS XML for each console into DB")
         CAX_ROM.ROM_DB_LoadListsGameXML(sPathFileDB,sPathGamesXML, flagDebug=1)  # Looks for XML files and loads file list into DB
    
-    if FLAGS["LOADLISTGAMES"]==1 :
-        print ("\n###LOADLISTGAMES#############################################")   # Total Game ROM Found and uploaded: 13938    
-        print ("Load RETROPIE ROM file paths  into DB")
-        print (sPathROMS)
-        CAX_ROM.ROM_DB_LoadRoms(sPathFileDB,sPathROMS, flagDebug=1)   # Looks for XML files and loads file list into DB
-        print ("======================================================")
-    
+   
     if FLAGS["LOADIMAGES"]==1 :
         print ("\n###LOADIMAGES################################################")
         print ("Load RETROPIE Images file paths  into DB")
@@ -241,25 +243,25 @@ if __name__ == '__main__':
         print ("\n####LOADLISTGAMES_2_XML_DB###################################")
         print ("2. BEGIN RESULTS show Game GAMES_2_XM [lCollection] =====")
         
-        print (sROOT_GAMES)
+        print (sROOT_retropie)
         print (sPathFileDB)
         print ("\n------------------------------------------------------")
-        for key in FLAGSConsole:
-             console=key
-             value=FLAGSConsole[key]        
-             if value==1:
-                  print('Loading XML contents for:' +console + " " + str(value))
-             
-        print ("\n------------------------------------------------------")       
+# =============================================================================
+#         for key in FLAGSConsole:
+#              console=key
+#              value=FLAGSConsole[key]        
+#              if value==1:
+#                   print('Loading XML contents for:' +console + " " + str(value))
+#              
+#         print ("\n------------------------------------------------------")       
+# =============================================================================
            
         for key in FLAGSConsole:
              console=key
-             value=FLAGSConsole[key]          
-            
-            
+             value=FLAGSConsole[key]      
              if value==1:
                 print('Loading XML contents for:' +console)
-                CAX_ROM.Load_xml_gameslist(sROOT_GAMES,sPathFileDB,console)        
+                CAX_ROM.Load_xml_gameslist(sROOT_retropie,sPathFileDB,console)        
         print ("======================================================")
 
    # CAX_ROM.make_xml("c64","gamelist.xml")

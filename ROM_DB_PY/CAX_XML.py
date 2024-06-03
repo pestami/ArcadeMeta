@@ -382,8 +382,8 @@ class cax_xml_rom:
 
     def Load_xml_gameslist(self,sRoot,sPathFileDB,console):
 
-        print ("======================================================")
-        print ("2. BEGIN RESULTS show Game [lCollection] ============")
+        print ("-----------------------------------------------------")
+        print ("2. BEGIN RESULTS show Game [lCollection] ------------")
 
         GamesListCollection = self.SelectGamesListCollection(sPathFileDB)
 
@@ -400,7 +400,7 @@ class cax_xml_rom:
                     print(console , 'ITEM XML: ' , game[0][:1])
                     self.ROM_DB_LoadMultipleXmlContent(sPathFileDB,game,console)
 
-            print ("END RESULTS ==================================")
+            print ("END RESULTS ------------------------------------")
             #Test_GetGames()
 
         print ("")
