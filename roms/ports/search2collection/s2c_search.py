@@ -265,13 +265,13 @@ class s2c:
                 print('\n..Update Search DataBase................................')
                 print('type ls to list installed  game Systems')
                 print('type ws to write index game Systems to DataBase')
-                print('type ds to delete a Systems from the search DataBase')
+                print('type ds <item> to delete a Systems from the search DataBase')
            
             if '3' in ID:
                 print( colors.fg.purple, "...")
                 print('\n.............................................')
                 print('type lc to list collections')
-                print('type dc to delete a collection')
+                print('type dc <item> to delete a collection')
            
             if '4' in ID:
                 print( colors.fg.lightblue, "...")
@@ -284,7 +284,7 @@ class s2c:
                 print('\n..SEARCH RESULTS.......................................')
                 print('type l  list last plalists search results')
                 print('type wr to write playlist to a collection list and rename')
-                print('type w  to write playlist to collection list')
+                print('type w  to write playlist to default named collection list')
            
             if '6' in ID:
                 print( colors.fg.green, "...")
