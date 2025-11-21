@@ -2,6 +2,7 @@
 # Created by Gweno 16/08/2019 for tutolibro.tech
 # https://github.com/Gweno/tutolibro.tech/blob/master/lopy/part9/ReverseRange.py
 #C:\ProgrammeApps\LibreOffice\share\Scripts\python\
+
     #HELP=============  
     #print(dir(oCell))
     #Help(oCell)

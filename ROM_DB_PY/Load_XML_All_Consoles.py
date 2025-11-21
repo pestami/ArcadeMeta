@@ -99,6 +99,7 @@ if __name__ == '__main__':
         #"1 1 PATHS 2 INITIALIZE_DB 3 LOADLISTGAMES 4 LOADROMS"
         #2  1 LOADIMAGES 2 LOADMEDIA 3 LOADIMAGESSCRAPED 4 LOADLISTGAMES_2_XML_DB
         sFLAGS='1001 1001 X'.replace(" ", "")
+        sFLAGS='1101 1001 X'.replace(" ", "")
         FLAGS = SetFlags(sFLAGS)         
          #################12345678
          
@@ -116,7 +117,7 @@ if __name__ == '__main__':
          #6 psp"psx"saturn"sg-1000"
          #7 snes"TurboGrafX"zxspectrum"pcengine
 
-         sFLAGS='0000 0000 0000 0000 0000 0000 0000X'.replace(" ", "")
+         sFLAGS='0000 0000 0000 1100 0000 0000 0000X'.replace(" ", "")
          FLAGSConsole = SetFagsConsole(sFLAGS) 
          
          
@@ -130,6 +131,11 @@ if __name__ == '__main__':
     
     sROOT_DB='/home/pi/Documents/Projects_DIY/2024-ROMS-DB/ROM_DB_PY'
     sROOT_GAMES='/home/pi/ROMS_EXTRA'
+    
+    sROOT_DB='/home/pi/Documents/ArcadeMeta/ROM_DB_PY' 
+    sROOT_GAMES='/media/pi/INTENSO/emulators_ROM_EXTRA'
+    
+    
     
     print ("Root GAMES Direcory=", sROOT_GAMES)
     
