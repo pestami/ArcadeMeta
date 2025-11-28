@@ -81,7 +81,9 @@ def _ResolveVariables(sCMD):
     
     sCMD=sCMD.replace('\n', '')
     sCMD=sCMD.replace('\r', '')
-    sCMD=sCMD.replace('/', '\\')      
+    sCMD=sCMD.replace('/', '
+
+\\')      
 
     return sCMD
 #============================================================================
