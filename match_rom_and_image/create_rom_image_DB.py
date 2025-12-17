@@ -21,7 +21,7 @@ def make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML):
     con.commit()
     con.close()
     
-    print(resultSQL11)
+    #print(resultSQL11)
 
     import xml.etree.ElementTree as ET
 # =============================================================================
@@ -45,9 +45,9 @@ def make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML):
         ET.SubElement(doc, "path").text = './'+GAME[0]
         ET.SubElement(doc, "name").text = GAME[1]
         if GAME[2] :
-                ET.SubElement(doc, "image").text = './downloaded_images/'+sConsole + '/'+GAME[2]
+                ET.SubElement(doc, "image").text = './'+sConsole + '/'+GAME[2]
         else:
-            ET.SubElement(doc, "image").text = './downloaded_images/'+sConsole + '/'+'1Aghost.jpg'
+            ET.SubElement(doc, "image").text = './'+sConsole + '/'+'1Aghost.png'
         
        # ET.SubElement(doc, "path").text = GAME[1]
        # ET.SubElement(doc, "name").text = GAME[2]
@@ -60,7 +60,7 @@ def make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML):
 
     tree = ET.ElementTree(root)
     print ("\n---UNFORMATED PRINT-------------------------------------------")  
-    print(ET.tostring(root, encoding='utf8').decode('utf8'))        
+    #print(ET.tostring(root, encoding='utf8').decode('utf8'))        
    # ET.indent(tree, space="\t", level=0)  # Python 3.8 upward        
     tree.write(sPathFilenameXML, encoding="utf-8")
     #------------------------------------------------------------------------
@@ -69,14 +69,14 @@ def make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML):
     temp = etree.parse(sPathFilenameXML) 
     new_xml = etree.tostring(temp, pretty_print = True, encoding = str) 
     print ("\n---PRETTY PRINT--------------------------------------------")  
-    print(new_xml)
+    #print(new_xml)
     #------------------------------------------------------------------------
     # Opening a file
     file1 = open(sPathFilenameXML, 'w')
     file1.writelines(new_xml)
     file1.close()
 
-    print (sPathFilenameXML)
+    #print (sPathFilenameXML)
     
     print ("===DONE XML===================================================")
 
@@ -91,8 +91,7 @@ def substring_until(text,str_until):
     else:
         return text
 
-# Define the directory you want to scan
-directory_to_scan = '/media/pi/INTENSO/emulators_ROM_EXTRA/roms/mastersystems'
+
 #----------------------------
 # Define the SQLite database file
 database_file = 'ROM_IMAGE.db'
@@ -105,24 +104,24 @@ cursor = conn.cursor()
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS ROMS
     (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-     game_name TEXT,
-     game_system TEXT,
-     file_name TEXT, 
-     file_path TEXT, 
-     file_size INTEGER)
+      game_name TEXT,
+      game_system TEXT,
+      file_name TEXT, 
+      file_path TEXT, 
+      file_size INTEGER)
 ''')
 # Create table if it doesn't exist
 # id INTEGER PRIMARY KEY AUTOINCREMENT, 
 cursor.execute('''
     CREATE TABLE IF NOT EXISTS IMAGES
     (id INTEGER PRIMARY KEY AUTOINCREMENT, 
-     game_name TEXT,
-     game_system TEXT,
-     file_name TEXT, 
-     file_path TEXT,    
-     file_size INTEGER)
+      game_name TEXT,
+      game_system TEXT,
+      file_name TEXT, 
+      file_path TEXT,    
+      file_size INTEGER)
 ''')
-if 1==2:
+if 1==1:
     cursor.execute('''
     DELETE FROM IMAGES;
     ''')
@@ -134,10 +133,12 @@ if 1==2:
 def scan_directory(directory):
     file_info_list = []
     for entry in os.scandir(directory):
-        if entry.is_file():
+          if entry.is_file():
             file_path = entry.path
             file_name = entry.name
-            file_size = entry.stat().st_size            
+            file_size = entry.stat().st_size  
+        
+                 
             game_system=file_path.split('/')[-2]
             
             game_name=remove_file_extension(file_name)
@@ -148,8 +149,7 @@ def scan_directory(directory):
                         
             file_info_list.append((game_name,game_system,file_name, file_path, file_size))
             print(f"Found file: {file_path}")
-        elif entry.is_dir():
-            file_info_list.extend(scan_directory(entry.path))
+ 
     return file_info_list
 #----------------------------
 def upload_to_roms(file_info_list):
@@ -191,8 +191,9 @@ def main():
     sConsole='nds'
     sConsole='n64'
     sConsole='neogeo'
+    sConsole='atari2600'
     
-    sConsole='n64'
+    sConsole='atari2600'
 
    
     lConsole=['mastersystem',
@@ -207,51 +208,57 @@ def main():
               'nds',
               'n64',
               'nes',
-              'snes']
+              'snes',
+              'atari2600']
     
     #for sConsole in lConsole:
-    sConsole=lConsole[12]
+        
+    sConsole=lConsole[13]
+    
     if 1==1:
         print('=======================================================')
         print(sConsole)
         print('=======================================================')
         # -----------------SCAN FOR ROMS---------------------------------------------------------
-        directory_to_scan1 = '/media/pi/INTENSO/emulators_ROM_EXTRA/roms/mastersystems'
-        directory_to_scan1 = '/media/pi/INTENSO/emulators_R36S/mastersystem'
-        directory_to_scan1 = '/media/pi/INTENSO/emulators_R36S/' + sConsole
-        directory_to_scan1 = '/media/pi/A87B-2C84/' + sConsole
+        # directory_to_scan1 = '/media/pi/INTENSO/emulators_ROM_EXTRA/roms/mastersystems'
+        # directory_to_scan1 = '/media/pi/INTENSO/emulators_R36S/mastersystem'
+        # directory_to_scan1 = '/media/pi/INTENSO/emulators_R36S/' + sConsole
+        # directory_to_scan1 = '/media/pi/A87B-2C84/' + sConsole
+        directory_to_scan1 = '/media/pi/EASYROMS/'+ sConsole
     
+        print(f"Scan for ROMS:: {directory_to_scan1}")
         file_info_list = scan_directory(directory_to_scan1)
         upload_to_roms(file_info_list)
         
         # -----------------SCAN FOR IMAGES---------------------------------------------------------
-        directory_to_scan2 = '/media/pi/INTENSO/emulators_ROM_EXTRA/downloaded_images/mastersystem'
-        directory_to_scan2 = '/media/pi/INTENSO/emulators_R36S/'+sConsole+'/downloaded_images/mastersystem' 
-        directory_to_scan2 = '/media/pi/INTENSO/emulators_R36S/'+sConsole+'/downloaded_images/' + sConsole
-        directory_to_scan2 = '/media/pi/A87B-2C84/' +sConsole+'/downloaded_images/' + sConsole
+        # directory_to_scan2 = '/media/pi/INTENSO/emulators_ROM_EXTRA/downloaded_images/mastersystem'
+        # directory_to_scan2 = '/media/pi/INTENSO/emulators_R36S/'+sConsole+'/downloaded_images/mastersystem' 
+        # directory_to_scan2 = '/media/pi/INTENSO/emulators_R36S/'+sConsole+'/downloaded_images/' + sConsole
+        # directory_to_scan2 = '/media/pi/A87B-2C84/' +sConsole+'/downloaded_images/' + sConsole
+        directory_to_scan2 = '/media/pi/EASYROMS/' +sConsole+'/' + sConsole
                  
+        print(f"Scan for IMAGES:: {directory_to_scan2}")
         file_info_list = scan_directory(directory_to_scan2)
         upload_to_images(file_info_list)
         conn.close()
           
-        # directory_to_scan2 = '/media/pi/A87B-2C84/' +sConsole+'/downloaded_images/' + sConsole+ '_box'
-                 
-        # file_info_list = scan_directory(directory_to_scan2)
-        # upload_to_images(file_info_list)
-        # conn.close()
         
         
         
       # -----------------CREATE GAMESLIST---------------------------------------------------------
         sPathFileDB='ROM_IMAGE.db'
         sRoot=''   
-        sFileNameXML='/media/pi/INTENSO/emulators_R36S/mastersystem/gamelist.xml'  
-        sFileNameXML='/media/pi/INTENSO/emulators_R36S/'+ sConsole+ '/gamelist.xml' 
-        sFileNameXML='/media/pi/A87B-2C84/'+ sConsole+ '/gamelist.xml' 
-        sFileNameXML2='/media/pi/A87B-2C84/'+ sConsole+ '/gamelist_mirek.xml'                 
+        # sFileNameXML='/media/pi/INTENSO/emulators_R36S/mastersystem/gamelist.xml'  
+        # sFileNameXML='/media/pi/INTENSO/emulators_R36S/'+ sConsole+ '/gamelist.xml' 
+        
+        # sFileNameXML='/media/pi/A87B-2C84/'+ sConsole+ '/gamelist.xml' 
+        # sFileNameXML2='/media/pi/A87B-2C84/'+ sConsole+ '/gamelist_mirek.xml'     
+        
+        sFileNameXML='/media/pi/EASYROMS/'+ sConsole+ '/gamelist.xml' 
+        sFileNameXML2='/media/pi/EASYROMS/'+ sConsole+ '/gamelist_mirek.xml'         
         
         make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML)
-        #make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML2)    
+        make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML2)    
         print('==COMPLETED EXECUTION =================================')
         print(sConsole)
         print('=======================================================')
