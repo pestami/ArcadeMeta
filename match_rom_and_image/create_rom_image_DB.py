@@ -326,7 +326,7 @@ def main():
               27:'nds',
               28:'sfc',
               29:'cps1',
-              30:'END',
+              30:'vectrex',
               31:'END',
               }
     
@@ -334,7 +334,7 @@ def main():
  #===================================================================================================================       
     sConsole=lConsole[14]   # choice final
     listConsole=[14,15,16]
-    listConsole=[29]
+    listConsole=[30]
     
     root_dir='/media/pi/EASYROMS/'
  
