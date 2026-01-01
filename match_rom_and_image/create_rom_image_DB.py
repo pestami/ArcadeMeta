@@ -55,9 +55,19 @@ def make_xml(sPathFileDB, sRoot,sConsole,sFileNameXML):
                 ET.SubElement(doc, "image").text = './'+sConsole + '/'+GAME[2]
                 nCount_Roms_ok_images+=1
         else:
+            # alternative solutions to missing png
             #ET.SubElement(doc, "image").text = './'+sConsole + '/'+'1a_ghost.png'
-            ET.SubElement(doc, "image").text = './1a_ghost.png'
+            #ET.SubElement(doc, "image").text = './1a_ghost.png'
+            
+            # point to missing png as it it did exist-later can 
+            #replace not existant png with png from other sources
+            #benifit is not having to regenerate gameslist.xml
+            
+            sROM_NAME=remove_file_extension(GAME[0])
+            ET.SubElement(doc, "image").text = './'+sConsole + '/Named_Snaps/'+sROM_NAME+'.png'
+            
             nCount_Roms_no_images+=1
+            
         
        # ET.SubElement(doc, "path").text = GAME[1]
        # ET.SubElement(doc, "name").text = GAME[2]
